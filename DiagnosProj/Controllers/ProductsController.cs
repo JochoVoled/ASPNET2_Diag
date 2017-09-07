@@ -50,6 +50,7 @@ namespace DiagnosProj.Controllers
         // GET: Products/Create
         public IActionResult Create()
         {
+            ViewBag.Categories = new SelectList(_context.ProductCategories, "ProductCategoryId","Name");
             return View();
         }
 
@@ -82,6 +83,9 @@ namespace DiagnosProj.Controllers
             {
                 return NotFound();
             }
+
+            ViewBag.Categories = new SelectList(_context.ProductCategories, "ProductCategoryId", "Name");
+
             return View(product);
         }
 

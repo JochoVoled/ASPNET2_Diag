@@ -2,30 +2,24 @@
 
 namespace DiagnosProj.Data
 {
-    public class InitDb
+    public static class InitDb
     {
 
-        private readonly ApplicationDbContext _context;
+        //private readonly ApplicationDbContext _context;
 
-        public InitDb(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        //public InitDb(ApplicationDbContext context)
+        //{
+        //    _context = context;
+        //}
 
-        public void Init()
+        public static void Init(ApplicationDbContext context)
         {
             /* TODO - Prepopulera ProductCategories med tre kategorier: "TV", "DVD" och "VHS". */
-            _context.ProductCategories.AddRange(new ProductCategory
-            {
-                Name = "TV"
-            }, new ProductCategory
-            {
-                Name = "DVD"
-            }, new ProductCategory
-            {
-                Name = "VHS"
-            });
-            _context.SaveChanges();
+            context.ProductCategories.AddRange(
+                new ProductCategory{ Name = "TV"  },
+                new ProductCategory{ Name = "DVD" },
+                new ProductCategory{ Name = "VHS" });
+            context.SaveChanges();
         }
     }
 }
