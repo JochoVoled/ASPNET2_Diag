@@ -14,7 +14,7 @@ namespace DiagnosProj.Data
 
         public void Init()
         {
-            // Seed data
+            /* TODO - Prepopulera ProductCategories med tre kategorier: "TV", "DVD" och "VHS". */
             _context.ProductCategories.AddRange(new ProductCategory
             {
                 Name = "TV"
