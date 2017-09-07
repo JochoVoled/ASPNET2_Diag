@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DiagnosProj.Data;
 using DiagnosProj.Models;
+using DiagnosProj.Services;
 using Microsoft.Extensions.Logging;
 
 namespace DiagnosProj.Controllers
@@ -15,11 +16,15 @@ namespace DiagnosProj.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly ILogger _logger;
+        private readonly ProductCategoryService _pcs;
 
-        public ProductsController(ApplicationDbContext context, ILogger<ProductsController> logger)
+        public ProductsController(ApplicationDbContext context,
+            ILogger<ProductsController> logger,
+            ProductCategoryService pcs)
         {
             _context = context;
             _logger = logger;
+            _pcs = pcs;
         }
 
         // GET: Products
@@ -50,7 +55,7 @@ namespace DiagnosProj.Controllers
         // GET: Products/Create
         public IActionResult Create()
         {
-            ViewBag.Categories = new SelectList(_context.ProductCategories, "ProductCategoryId","Name");
+            ViewBag.Categories = _pcs.GetSelectList();
             return View();
         }
 
@@ -84,7 +89,7 @@ namespace DiagnosProj.Controllers
                 return NotFound();
             }
 
-            ViewBag.Categories = new SelectList(_context.ProductCategories, "ProductCategoryId", "Name");
+            ViewBag.Categories = _pcs.GetSelectList();
 
             return View(product);
         }
